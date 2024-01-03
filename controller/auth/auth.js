@@ -51,9 +51,8 @@ const authController = {
             if (!verify._id) return next(customErrHandler.unAuthorized(401, 'Somthing goes wrong Nice try'))
 
             const user = await User.findOne({ _id: verify._id })
-            res.cookie('token', null, {
+            res.clearCookie('token', {
                 httpOnly: true,
-                expires: new Date(Date.now()),
                 sameSite: "none",
                 strict: true,
             }).json({
